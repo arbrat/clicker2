@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КЛИКЕР 2.0</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-theme">
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" onclick="openTab('clicker')">Кликер</button>
+            <button class="tab" onclick="openTab('upgrades')">Улучшения</button>
+            <button class="tab" onclick="openTab('clickers')">Кликерсы</button>
+            <button class="tab" onclick="openTab('skins')">Скины</button>
+            <button class="tab" onclick="openTab('roulette')">Рулетка</button>
+            <button class="tab" onclick="openTab('customization')">Кастомизация</button>
+            <button class="tab" onclick="openTab('shop')">Магазин</button>
+            <button class="tab" onclick="openTab('stats')">Статистика</button>
+        </div>
+
+        <!-- Вкладка кликера -->
+        <div id="clicker" class="tab-content active">
+            <h1>ULTRA Кликер PRO</h1>
+            <div id="counter">0 кликов</div>
+            <div class="cps">Кликов в секунду: 0</div>
+            <div class="max-clicks">Максимум: <span id="max-clicks">50,000</span> кликов</div>
+            <button id="main-clicker" class="round-clicker">КЛИКАЙ!</button>
+        </div>
+
+        <!-- Вкладка улучшений -->
+        <div id="upgrades" class="tab-content">
+            <h2>Улучшения кликов</h2>
+            <div id="click-upgrades" class="upgrades-container"></div>
+            
+            <h2>Автокликеры</h2>
+            <div id="auto-upgrades" class="upgrades-container"></div>
+        </div>
+
+        <!-- Вкладка Кликерсов -->
+        <div id="clickers" class="tab-content">
+            <h2>Кликерсы</h2>
+            <div class="clickers-info">
+                <p>Ваши Кликерсы: <span id="clickers-amount">0</span></p>
+                <p>Буст от Кликерсов: <span id="clickers-boost">0</span>x</p>
+                <button onclick="convertToClickers()" class="convert-button">Обменять 100M кликов → 1 Кликерс</button>
+            </div>
+        </div>
+
+        <!-- Вкладка скинов -->
+        <div id="skins" class="tab-content">
+            <h2>Скины для кнопки</h2>
+            <div class="skins-grid" id="skins-container"></div>
+        </div>
+
+        <!-- Вкладка рулетки -->
+        <div id="roulette" class="tab-content">
+            <h2>Рулетка</h2>
+            <div class="roulette-types">
+                <div class="roulette-type">
+                    <h3>Обычная</h3>
+                    <p>Стоимость: 50,000 кликов</p>
+                    <button onclick="spinRoulette('normal')" id="normal-roulette">Крутить</button>
+                    <div class="cooldown" id="normal-cooldown"></div>
+                </div>
+                <div class="roulette-type">
+                    <h3>Эпическая</h3>
+                    <p>Стоимость: 250,000 кликов</p>
+                    <button onclick="spinRoulette('epic')" id="epic-roulette">Крутить</button>
+                    <div class="cooldown" id="epic-cooldown"></div>
+                </div>
+                <div class="roulette-type">
+                    <h3>Легендарная</h3>
+                    <p>Стоимость: 1,000,000 кликов</p>
+                    <button onclick="spinRoulette('legendary')" id="legendary-roulette">Крутить</button>
+                    <div class="cooldown" id="legendary-cooldown"></div>
+                </div>
+            </div>
+            <div id="roulette-result">Результат: -</div>
+        </div>
+
+        <!-- Вкладка кастомизации -->
+        <div id="customization" class="tab-content">
+            <h2>Кастомизация</h2>
+            <div class="customization-section">
+                <h3>Фоны</h3>
+                <div class="background-options" id="background-options"></div>
+            </div>
+            <div class="customization-section">
+                <h3>Цвет текста</h3>
+                <div class="color-options" id="text-colors"></div>
+            </div>
+            <div class="customization-section">
+                <h3>Цвет интерфейса</h3>
+                <div class="color-options" id="ui-colors"></div>
+            </div>
+            <button onclick="toggleTheme()" class="theme-toggle">Переключить тему</button>
+        </div>
+
+        <!-- Вкладка магазина -->
+        <div id="shop" class="tab-content">
+            <h2>Магазин</h2>
+            <div class="shop-item">
+                <h3>Увеличение инвентаря</h3>
+                <p>Текущий лимит: <span id="current-max">50,000</span> кликов</p>
+                <p>Следующее улучшение: +50,000</p>
+                <p>Стоимость: <span id="inventory-cost">50,000</span> кликов</p>
+                <button onclick="upgradeInventory()">Улучшить</button>
+            </div>
+        </div>
+
+        <!-- Вкладка статистики -->
+        <div id="stats" class="tab-content">
+            <h2>Статистика</h2>
+            <div class="stats-grid">
+                <div>Всего кликов: <span id="total-clicks">0</span></div>
+                <div>Кликов в секунду: <span class="cps">0</span></div>
+                <div>Куплено улучшений: <span id="total-upgrades">0</span></div>
+                <div>Сила клика: <span id="click-power">1</span></div>
+                <div>Кликерсы: <span id="clickers-count">0</span></div>
+                <div>Максимум кликов: <span id="max-clicks-stat">50,000</span></div>
+                <div>Активный скин: <span id="active-skin">Нет</span></div>
+                <div>Сыграно в рулетку: <span id="roulette-spins">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
